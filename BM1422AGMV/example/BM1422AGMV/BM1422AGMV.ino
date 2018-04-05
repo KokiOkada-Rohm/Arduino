@@ -1,7 +1,7 @@
 /*****************************************************************************
-  BM1422.ino
+  BM1422AGMV.ino
 
- Copyright (c) 2016 ROHM Co.,Ltd.
+ Copyright (c) 2018 ROHM Co.,Ltd.
 
  Permission is hereby granted, free of charge, to any person obtaining a copy
  of this software and associated documentation files (the "Software"), to deal
@@ -22,7 +22,7 @@
  THE SOFTWARE.
 ******************************************************************************/
 #include <Wire.h>
-#include <BM1422.h>
+#include <BM1422AGMV.h>
 
 BM1422 bm1422(BM1422_DEVICE_ADDRESS_0F);
 

@@ -1,7 +1,7 @@
 /*****************************************************************************
-  BM1422.h
+  BM1422AGMV.h
 
- Copyright (c) 2016 ROHM Co.,Ltd.
+ Copyright (c) 2018 ROHM Co.,Ltd.
 
  Permission is hereby granted, free of charge, to any person obtaining a copy
  of this software and associated documentation files (the "Software"), to deal
@@ -21,8 +21,8 @@
  OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN
  THE SOFTWARE.
 ******************************************************************************/
-#ifndef _BM1422_H_
-#define _BM1422_H_
+#ifndef _BM1422AGMV_H_
+#define _BM1422AGMV_H_
 
 #define BM1422_DEVICE_ADDRESS_0E   (0x0E)    // 7bit Addrss
 #define BM1422_DEVICE_ADDRESS_0F   (0x0F)    // 7bit Address
@@ -61,7 +61,7 @@
 class BM1422
 {
   public:
-      BM1422(int slave_address);
+    BM1422(int slave_address);
     byte init(void) ;
     byte get_rawval(unsigned char *data);
     byte get_val(float *data);
@@ -73,4 +73,4 @@ class BM1422
     unsigned char _sens;
 };
 
-#endif // _BM1422_H_
+#endif // _BM1422AGMV_H_

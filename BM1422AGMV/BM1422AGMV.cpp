@@ -24,7 +24,7 @@
 //#include <avr/pgmspace.h>
 #include <Wire.h>
 #include "arduino.h"
-#include "BM1422.h"
+#include "BM1422AGMV.h"
 
 BM1422::BM1422(int slave_address)
 {
@@ -168,7 +168,7 @@ byte BM1422::read(unsigned char memory_address, unsigned char *data, int size)
     return (rc);
   }
 
-  Wire.requestFrom(_device_address, size, true);
+  Wire.requestFrom((int)_device_address, (int)size, (int)true);
   cnt = 0;
   while(Wire.available()) {
     data[cnt] = Wire.read();
