@@ -1,7 +1,7 @@
 /*****************************************************************************
-  BM1383GLV.cpp
+  BM1383AGLV.cpp
 
- Copyright (c) 2016 ROHM Co.,Ltd.
+ Copyright (c) 2018 ROHM Co.,Ltd.
 
  Permission is hereby granted, free of charge, to any person obtaining a copy
  of this software and associated documentation files (the "Software"), to deal
@@ -21,72 +21,72 @@
  OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN
  THE SOFTWARE.
 ******************************************************************************/
-#include <avr/pgmspace.h>
+//#include <avr/pgmspace.h>
 #include <Wire.h>
 #include "arduino.h"
-#include "BM1383GLV.h"
+#include "BM1383AGLV.h"
 
-BM1383GLV::BM1383GLV(void)
+BM1383AGLV::BM1383AGLV(void)
 {
 
 }
 
-byte BM1383GLV::init(void)
+byte BM1383AGLV::init(void)
 {
   byte rc;
   unsigned char reg;
 
-  rc = read(BM1383GLV_ID, &reg, sizeof(reg));
+  rc = read(BM1383AGLV_ID, &reg, sizeof(reg));
   if (rc != 0) {
-    Serial.println(F("Can't access BM1383GLV"));
+    Serial.println("Can't access BM1383AGLV");
     return (rc);
   }
-  Serial.print(F("BM1383GL ID Register Value = 0x"));
+  Serial.println("BM1383GL ID Register Value = 0x");
   Serial.println(reg, HEX);
 
-  if (reg != BM1383GLV_ID_VAL) {
-    Serial.println(F("Can't find BM1383GLV"));
+  if (reg != BM1383AGLV_ID_VAL) {
+    Serial.println("Can't find BM1383AGLV");
     return (rc);
   }
 
-  reg = BM1383GLV_POWER_DOWN_VAL;
-  rc = write(BM1383GLV_POWER_DOWN, &reg, sizeof(reg));
+  reg = BM1383AGLV_POWER_DOWN_VAL;
+  rc = write(BM1383AGLV_POWER_DOWN, &reg, sizeof(reg));
   if (rc != 0) {
-    Serial.println(F("Can't write BM1383GLV POWER_DOWN register"));
+    Serial.println("Can't write BM1383AGLV POWER_DOWN register");
     return (rc);
   }
 
   delay(1);
 
-  reg = BM1383GLV_RESET_VAL;
-  rc = write(BM1383GLV_RESET, &reg, sizeof(reg));
+  reg = BM1383AGLV_RESET_VAL;
+  rc = write(BM1383AGLV_RESET, &reg, sizeof(reg));
   if (rc != 0) {
-    Serial.println(F("Can't write BM1383GLV SLEEP register"));
+    Serial.println("Can't write BM1383AGLV SLEEP register");
     return (rc);
   }
 
-  reg = BM1383GLV_MODE_CONTROL_VAL;
-  rc = write(BM1383GLV_MODE_CONTROL, &reg, sizeof(reg));
+  reg = BM1383AGLV_MODE_CONTROL_VAL;
+  rc = write(BM1383AGLV_MODE_CONTROL, &reg, sizeof(reg));
   if (rc != 0) {
-    Serial.println(F("Can't write BM1383GLV MODE_CONTROL register"));
+    Serial.println("Can't write BM1383AGLV MODE_CONTROL register");
     return (rc);
   }
   
 }
 
-byte BM1383GLV::get_rawval(unsigned char *data)
+byte BM1383AGLV::get_rawval(unsigned char *data)
 {
   byte rc;
 
-  rc = read(BM1383GLV_PRESSURE_MSB, data, 3);
+  rc = read(BM1383AGLV_PRESSURE_MSB, data, 3);
   if (rc != 0) {
-    Serial.println(F("Can't get BM1383GLV PRESS value"));
+    Serial.println("Can't get BM1383AGLV PRESS value");
   }
 
   return (rc);
 }
 
-byte BM1383GLV::get_val( float *press)
+byte BM1383AGLV::get_val( float *press)
 {
   byte rc;
   unsigned char val[3];
@@ -108,31 +108,31 @@ byte BM1383GLV::get_val( float *press)
   return (rc);
 }
 
-byte BM1383GLV::write(unsigned char memory_address, unsigned char *data, unsigned char size)
+byte BM1383AGLV::write(unsigned char memory_address, unsigned char *data, unsigned char size)
 {
   byte rc;
   unsigned int cnt;
 
-  Wire.beginTransmission(BM1383GLV_DEVICE_ADDRESS);
+  Wire.beginTransmission(BM1383AGLV_DEVICE_ADDRESS);
   Wire.write(memory_address);
   Wire.write(data, size);
   rc = Wire.endTransmission();
   return (rc);
 }
 
-byte BM1383GLV::read(unsigned char memory_address, unsigned char *data, int size)
+byte BM1383AGLV::read(unsigned char memory_address, unsigned char *data, int size)
 {
   byte rc;
   unsigned char cnt;
 
-  Wire.beginTransmission(BM1383GLV_DEVICE_ADDRESS);
+  Wire.beginTransmission(BM1383AGLV_DEVICE_ADDRESS);
   Wire.write(memory_address);
   rc = Wire.endTransmission(false);
   if (rc != 0) {
     return (rc);
   }
 
-  Wire.requestFrom(BM1383GLV_DEVICE_ADDRESS, size, true);
+  Wire.requestFrom((int)BM1383AGLV_DEVICE_ADDRESS, (int)size, (int)true);
   cnt = 0;
   while(Wire.available()) {
     data[cnt] = Wire.read();

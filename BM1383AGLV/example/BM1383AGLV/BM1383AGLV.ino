@@ -1,5 +1,5 @@
 /*****************************************************************************
-  BM1383AGLV.ino
+  BM1383GLV.ino
 
  Copyright (c) 2018 ROHM Co.,Ltd.
 
@@ -29,7 +29,7 @@ BM1383AGLV bm1383;
 void setup() {
   byte rc;
 
-  Serial.begin(9600);
+  Serial.begin(115200);
   while (!Serial);
 
   Wire.begin();
@@ -43,7 +43,7 @@ void loop() {
 
   rc = bm1383.get_val(&press);
   if (rc == 0) {
-    Serial.write("BM1383GLV (PRESS) = ");
+    Serial.write("BM1383AGLV (PRESS) = ");
     Serial.print(press);
     Serial.println(" [hPa]");
     Serial.println();
