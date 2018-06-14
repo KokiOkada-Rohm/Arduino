@@ -23,7 +23,7 @@
 ******************************************************************************/
 //#include <avr/pgmspace.h>
 #include <Wire.h>
-#include "arduino.h"
+#include "Arduino.h"
 #include "BM1422AGMV.h"
 
 BM1422::BM1422(int slave_address)
